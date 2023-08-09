@@ -1,0 +1,17 @@
+{
+  "name": "authentification-site",
+  "version": "1.0.0",
+  "description": "This is an updated version of my login application(check my profile for more details). This time is done as a web application, and compared to the previous versions, it is fully working, meaning the accounts you create are stored in a database and you can login from anywhere at any time(as long as you have internet connection). You can check it for yourself here: http://82.76.142.241:5500/",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Virlan Cristian-Alexandru",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7",
+    "url": "^0.11.1"
+  }
+}
