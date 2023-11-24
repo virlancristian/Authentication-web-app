@@ -30,6 +30,7 @@ body {
 }
 
 .content button {
+    margin: 6px;
     height: 6%;
 }
 

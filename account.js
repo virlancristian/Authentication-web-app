@@ -1,6 +1,6 @@
 const email = localStorage.getItem('email');
 
-fetch("", {
+fetch("" + email, {
     method:'GET',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
