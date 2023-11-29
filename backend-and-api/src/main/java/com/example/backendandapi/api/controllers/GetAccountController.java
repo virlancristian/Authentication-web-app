@@ -24,7 +24,7 @@ public class GetAccountController {
         UserDbEntity requestedUser = userDbService.getUser(username);
 
         if(requestedUser == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(
