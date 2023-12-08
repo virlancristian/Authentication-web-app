@@ -6,6 +6,7 @@ import com.example.backendandapi.services.userdb.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class GetAccountController {
         this.userDbService = userDbService;
     }
 
+    @CrossOrigin("http://localhost:3000")
     @GetMapping("/api/account")
     public ResponseEntity<UserInfo> getAccount(@RequestParam String username) {
         UserDbEntity requestedUser = userDbService.getUser(username);

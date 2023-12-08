@@ -1,0 +1,41 @@
+.account-create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.field p {
+    font-family: 'Ubuntu';
+    font-size: 1.7vh;
+}
+
+.field input {
+    height: 2.5vh;
+    border-radius: 9px;
+    background: rgba(110, 110, 112, 0.7);
+    margin-top: 3%;
+}
+
+#create-account-button {
+    height: 4vh;
+    font-family: 'Ubuntu';
+    background: rgba(110, 110, 112, 0.9);
+    width: 12vh;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+#create-account-button:hover {
+    cursor: pointer;
+}

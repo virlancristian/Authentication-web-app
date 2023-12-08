@@ -1,0 +1,8 @@
+body {
+    background: url(../assets/media/background.jpg);
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url(../assets/fonts/Ubuntu-L.ttf);
+}

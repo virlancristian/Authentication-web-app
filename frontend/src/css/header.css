@@ -1,0 +1,27 @@
+header {
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 14%;
+}
+
+header a {
+    font-family: Ubuntu;
+    margin-right: 10%;
+    font-size: 170%;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#header-button {
+    font-family: Ubuntu;
+    margin-right: 10%;
+    font-size: 170%;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#header-button:hover {
+    cursor: pointer;
+}
