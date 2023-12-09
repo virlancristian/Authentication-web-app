@@ -6,6 +6,7 @@ import com.example.backendandapi.models.dbentities.UserDbEntity;
 import com.example.backendandapi.models.requests.ModifyAccountRequest;
 import com.example.backendandapi.services.userdb.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ModifyAccountController {
     UserDbService userDbService;
+    @Value("${internal.ip}")
+    private static final String INTERNAL_IP = "";
+    private static final String FRONTEND_SERVER_ADDRESS = "http://" + INTERNAL_IP + ":3000";
 
     @Autowired
     public ModifyAccountController(UserDbService userDbService) {
         this.userDbService = userDbService;
     }
 
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", FRONTEND_SERVER_ADDRESS})
     @PostMapping("/api/account/edit")
     public ResponseEntity<ResponseStatus> modifyAccount(@RequestBody ModifyAccountRequest account) {
         ResponseStatus status = verifyRequest(account);

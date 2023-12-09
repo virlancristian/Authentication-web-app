@@ -15,6 +15,7 @@
 .field p {
     font-family: 'Ubuntu';
     font-size: 1.7vh;
+    color: #ffffff;
 }
 
 .field input {
@@ -28,7 +29,7 @@
     height: 4vh;
     font-family: 'Ubuntu';
     background: rgba(110, 110, 112, 0.9);
-    width: 12vh;
+    width: 12vw;
     border-radius: 11px;
     display: flex;
     align-items: center;
@@ -38,4 +39,15 @@
 
 #create-account-button:hover {
     cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .field {
+        width: 90%;
+    }
+
+    #create-account-button {
+        margin-top: 5%;
+        width: 50%;
+    }
 }

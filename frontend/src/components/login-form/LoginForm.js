@@ -7,6 +7,8 @@ import formInputs from '../../cache/form-inputs';
 import '../../css/login-form.css';
 
 const LoginForm = () => {
+    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
+    
     const navigate = useNavigate();
     const [account, setAccount] = useState({
         username: '',
@@ -27,7 +29,7 @@ const LoginForm = () => {
     };
 
     const loginRequest = () => {
-        fetch(`http://localhost:8080/api/account/login`, {
+        fetch(`http://${INTERNAL_IP}:8080/api/account/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -14,7 +14,7 @@ function Header({ username }) {
                 username != null ? 
                 (<>
                     <div id="header-button" onClick={() => navigate("/account.html", {state: {username}})}>My account</div> 
-                    <div id="header-button" onClick={handleLogOut}>Log out</div>
+                    <div id="header-button" onClick={() => handleLogOut()}>Log out</div>
                 </>) 
                 : (
                     <>

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/account-details.css';
+
 import messages from '../../cache/api-messages';
 
+import '../../css/account-details.css';
+
 const AccountDetails = ({ username }) => {
+    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
     const navigate = useNavigate();
+    
     const [account, setAccount] = useState({});
     const [isEditable, setEditable] = useState(true);
     const [newAccount, setNewAccount] = useState({
@@ -27,7 +31,7 @@ const AccountDetails = ({ username }) => {
     }
 
     const modifyAccount = () => {
-        fetch(`http://localhost:8080/api/account/edit`, {
+        fetch(`http://${INTERNAL_IP}:8080/api/account/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +61,7 @@ const AccountDetails = ({ username }) => {
 
    useEffect(() => {
     const requestAccount = () => {
-        fetch(`http://localhost:8080/api/account?username=${username}`)
+        fetch(`http://${INTERNAL_IP}:8080/api/account?username=${username}`)
         .then(response => response.json())
         .then(data => {
             setAccount(data);
@@ -65,7 +69,7 @@ const AccountDetails = ({ username }) => {
     }
 
     requestAccount();
-   }, [username]);
+   }, [username, INTERNAL_IP]);
 
     return (
         <div className="account-details-content">

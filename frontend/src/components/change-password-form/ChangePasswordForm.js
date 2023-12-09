@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/change-password-form.css';
+
 import messages from '../../cache/api-messages';
 
+import '../../css/change-password-form.css';
+
 const ChangePasswordForm = ({ username }) => {
+    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
     const navigate = useNavigate();
+    
     const [newAccount, setNewAccount] = useState({
         oldUsername: username,
         newUsername: null,
@@ -25,7 +29,7 @@ const ChangePasswordForm = ({ username }) => {
     };
 
     const modifyAccount = () => {
-        fetch(`http://localhost:8080/api/account/edit`, {
+        fetch(`http://${INTERNAL_IP}:8080/api/account/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
