@@ -29,7 +29,7 @@ const LoginForm = () => {
     };
 
     const loginRequest = () => {
-        fetch(`http://${INTERNAL_IP}:8080/api/account/login`, {
+        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

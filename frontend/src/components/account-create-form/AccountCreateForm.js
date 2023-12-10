@@ -23,7 +23,7 @@ const AccountCreateForm = () => {
     };
 
     const createAccountRequest = () => {
-        fetch(`http://${INTERNAL_IP}:8080/api/account/create`, {
+        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/create`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
