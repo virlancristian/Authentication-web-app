@@ -31,7 +31,7 @@ const AccountDetails = ({ username }) => {
     }
 
     const modifyAccount = () => {
-        fetch(`http://${INTERNAL_IP}:8080/api/account/edit`, {
+        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -61,7 +61,7 @@ const AccountDetails = ({ username }) => {
 
    useEffect(() => {
     const requestAccount = () => {
-        fetch(`http://${INTERNAL_IP}:8080/api/account?username=${username}`)
+        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account?username=${username}`)
         .then(response => response.json())
         .then(data => {
             setAccount(data);
