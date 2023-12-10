@@ -10,7 +10,7 @@ const AccountDetails = ({ username }) => {
     const navigate = useNavigate();
     
     const [account, setAccount] = useState({});
-    const [isEditable, setEditable] = useState(true);
+    const [isEditable, setEditable] = useState(false);
     const [newAccount, setNewAccount] = useState({
         oldUsername: username,
         newUsername: null,
@@ -54,7 +54,7 @@ const AccountDetails = ({ username }) => {
     const toggleEditable = () => {
         setEditable(!isEditable);
 
-        if(!isEditable) {
+        if(isEditable) {
             modifyAccount();
         }
     }
@@ -79,16 +79,16 @@ const AccountDetails = ({ username }) => {
             </div>
             <div className="other-account-details">
                 <div className="username">Username: 
-                        <div contentEditable={!isEditable ? true : false} id="newUsername" onKeyUp={changeRequestBody}>{account.username}</div>
+                        <div contentEditable={isEditable} id="newUsername" onKeyUp={changeRequestBody}>{account.username}</div>
                 </div>
                 <div className="about-me-title">About me</div>
-                    <div className="about-me" contentEditable={!isEditable ? true : false} id="about_me" onKeyUp={changeRequestBody}>{account.about_me}</div>
+                    <div className="about-me" contentEditable={isEditable} id="about_me" onKeyUp={changeRequestBody}>{account.about_me}</div>
                 <div className="account-modification-buttons">
                     <div className="edit-profile-button" onClick={toggleEditable}>
                         {
                             isEditable ? 
-                            "Edit profile" :
-                            "Save changes"
+                            "Save changes" :
+                            "Edit profile"
                         }
                     </div>
                     <div className="change-password-button" onClick={() => navigate("/change_password.html", {state: {"username": username}})}>Change password</div>
