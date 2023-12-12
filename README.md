@@ -1,34 +1,74 @@
-# Authentification site(Login app 3.0)
+# Authentification web app 2.0.0
 
-This is an updated version of my login application(check my profile for more details). This time is done as a web application, and compared to the previous versions, it is fully working, meaning the accounts you create are stored in a database and you can login from anywhere at any time(as long as you have internet connection). You can check it for yourself here: http://82.76.142.241:3000
+This is a web application dedicated for a simple authentification system, as well as viewing your created account and modifying the details. The application is written in `React` for the frontend, `Spring Boot` for the backend and `MySQL` for the database
 
-## Components
+## Table of contents
 
-On the frontend part, the application consists of 4 parts:
+- [Release notes](#release-notes)
+- [Required 3rd party tools](#required-3rd-party-tools)
+- [Deploying the application](#deploying-the-application)
+- [App documentation](#app-documentation)
+- [Useful 3rd party docs](#useful-3rd-party-docs)
 
--A main UI where you can select if you want to create an account/login
--An UI for the account creation
+## Release notes
 
--An UI for loggin in
+- [Relase 2.0.0 release notes]([url](https://github.com/virlancristian/Authentification-site/pull/6))
 
--A UI for a successful login where you can see the details of the account
+## Required 3rd party tools
 
-All the HTTP requests for account creation/logging in are done in JavaScript and sent to the backend to handle them
+- [Node.js v20.8.1](https://nodejs.org/dist/v20.8.1/)
+- [Java 20.0.2](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html)
+- [MySQL 8.0](https://dev.mysql.com/downloads/installer/)
 
-The backend is done using Spring Boot and has 3 main functions:
+## Deploying the application
 
--one for handling POST requests for account creations
+After installing all your 3rdparty tools do the following steps before starting the application:
+- Open MySQL workbench and run the following query:
+```mysql
+CREATE DATABASE userdb;
+USE userdb;
+CREATE TABLE users(
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    profilePictureURL VARCHAR(500),
+    about_me VARCHAR(500),
+    PRIMARY KEY (id)
+);
+``` 
+- Go into your app folder to `src/backend-and-api/src/main/resources` and open `application.properties`
+- Fill in the `spring.datasource.username` and `spring.datasource.password` fields and fill them with your MySQL authentification credentials(or create another user for the )
 
--one for handling POST requests for logging in and verifying if the information sent by the user is found in the database
+**Optional: providing the internal IP**
+If you want to access your application from outside of your computer from any device in your local network you must provide the internal IP to the application. Do the following steps:
+- Run the `obtain-internal-ip.bat` file from the root directory if you are on Windows or run
+```bash
+chmod +x obtain-internal-ip.sh
+./obtain-internal-ip.sh
+```
+if you are on Linux
+- Copy the IP address from `internal_ip.txt`
+- Go to `src/backend-and-api/src/main/resources` and open `application.properties`
+- Fill in the `internal.ip` field with the copied IP
+- Go to the root directory then go to `src/frontend` and create a file name `.env`
+- Open the file and write the following content:
+```env
+REACT_APP_INTERNAL_IP={your_ip_goes_here}
+```
 
--one for handling GET requests for obtaining the account information
+- Everything is done! You can run the `start.bat` file from the root directory if you are on Windows or run
+```bash
+chmod +x start.sh
+./start.sh
+```
+if you are on Linux
 
-All the information regarding the user's data is being stored with the help of the Spring Boot application into a MySQL database
+## App documentation
 
-## How to run the servers
-The frontend server runs on a NodeJS server.
-Once you have NodeJS installed, type in "npm start" to start the frontent server
+[Click here!](https://github.com/virlancristian/Authentification-site/issues/5)
 
-The backend server runs on an integrated tomcat server
-You will need Java 17 or higher to run the integrated tomcat server 
-To run the server, in the bash go to the backend forlder and type "./mvnw spring-boot:run"
+## Useful 3rd party docs
+
+- [React](https://devdocs.io/react/)
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)

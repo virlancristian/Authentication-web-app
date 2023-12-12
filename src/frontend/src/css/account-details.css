@@ -1,0 +1,86 @@
+.account-details-content {
+    display: flex;
+    flex-direction: row;
+    margin: 5%;
+}
+
+.profile-picture-content {
+    margin: 1%;
+}
+
+.profile-picture-content p {
+    font-family: 'Ubuntu';
+}
+
+.profile-picture-content p:hover {
+    cursor: pointer;
+}
+
+.other-account-details {
+    margin: 1%;
+    font-family: 'Ubuntu';
+    width: 100%;
+}
+
+.username, .about-me-title {
+    font-size: 2.4vh;
+    margin-bottom: 2%;
+    display: flex;
+}
+
+.about-me {
+    background: rgba(110, 110, 112, 0.8);
+    height: 250%;
+    width: 150%;
+    border-radius: 11px;
+    padding: 1%;
+    max-width: 29vw;
+    max-height: 30vh;
+    margin-bottom: 2%;
+}
+
+.account-modification-buttons {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.edit-profile-button, .change-password-button {
+    background: rgba(110, 110, 112, 0.6);
+    height: 7vh;
+    width: 30%;
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.change-password-button {
+    width: 32%;
+}
+
+.edit-profile-button, .change-password-button:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .account-details-content {
+        flex-direction: column;
+    }
+
+    .about-me {
+        max-width: 50vw;
+        width: 50vw;
+        height: 40vh;
+        max-height: 40vh;
+    }
+
+    .account-modification-buttons {
+        width: 60%;
+    }
+
+    .edit-profile-button, .change-password-button {
+        width: 45%;
+    }
+}
