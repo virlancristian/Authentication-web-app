@@ -12,7 +12,7 @@ This is a web application dedicated for a simple authentification system, as wel
 
 ## Release notes
 
-- Relase 2.0.0 release notes
+- [Relase 2.0.0 release notes]([url](https://github.com/virlancristian/Authentification-site/pull/6))
 
 ## Required 3rd party tools
 
