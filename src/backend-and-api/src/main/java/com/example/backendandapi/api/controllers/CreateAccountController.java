@@ -17,16 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CreateAccountController {
     UserDbService userDbService;
-    @Value("${internal.ip}")
-    private static final String INTERNAL_IP = "";
-    private static final String FRONTEND_SERVER_ADDRESS = "http://" + INTERNAL_IP + ":3000";
 
     @Autowired
     public CreateAccountController(UserDbService userDbService) {
         this.userDbService = userDbService;
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000", FRONTEND_SERVER_ADDRESS})
+    @CrossOrigin
     @PutMapping(value = "/api/account/create")
     public ResponseEntity<ResponseStatus> createAccount(@RequestBody CreateAccountRequest requestedAccount) {
         ResponseStatus status = verifyRequest(requestedAccount);
