@@ -15,16 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GetAccountController {
     UserDbService userDbService;
-    @Value("${internal.ip}")
-    private static final String INTERNAL_IP = "";
-    private static final String FRONTEND_SERVER_ADDRESS = "http://" + INTERNAL_IP + ":3000";
 
     @Autowired
     public GetAccountController(UserDbService userDbService) {
         this.userDbService = userDbService;
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000", FRONTEND_SERVER_ADDRESS})
+    @CrossOrigin
     @GetMapping("/api/account")
     public ResponseEntity<UserInfo> getAccount(@RequestParam String username) {
         UserDbEntity requestedUser = userDbService.getUser(username);

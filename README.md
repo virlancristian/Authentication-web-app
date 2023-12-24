@@ -1,4 +1,4 @@
-# Authentification web app 2.0.0
+# Authentication web app 2.0.0
 
 This is a web application dedicated for a simple authentification system, as well as viewing your created account and modifying the details. The application is written in `React` for the frontend, `Spring Boot` for the backend and `MySQL` for the database
 
