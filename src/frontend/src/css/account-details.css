@@ -8,12 +8,21 @@
     margin: 1%;
 }
 
+.profile-picture-content img {
+    max-width: 220px;
+    max-height: 220px;
+}
+
 .profile-picture-content p {
     font-family: 'Ubuntu';
 }
 
 .profile-picture-content p:hover {
     cursor: pointer;
+}
+
+.profile-picture-content input {
+    display: none;
 }
 
 .other-account-details {

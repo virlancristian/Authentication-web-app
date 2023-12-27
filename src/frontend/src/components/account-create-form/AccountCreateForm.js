@@ -54,9 +54,7 @@ const AccountCreateForm = () => {
                     </div>
                 ))
             }
-            <div className="field" id="create-account-button" onClick={createAccountRequest}>
-                <div className="button">Create account</div>
-            </div>
+            <div className="field" id="create-account-button" onClick={createAccountRequest}>Create account</div>
         </div>
     );
 }

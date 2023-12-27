@@ -21,6 +21,32 @@ const AccountDetails = ({ username }) => {
         newPasswordConfirm: null
     });
 
+    const openFileExplorer = () => {
+        const uploadImageInput = document.querySelector('.profile-picture-content input');
+
+        uploadImageInput.click();
+    }
+
+    const uploadImage = async () => {
+        const uploadImageInput = document.querySelector('.profile-picture-content input');
+        let requestBody = new FormData();
+
+        requestBody.append('image', uploadImageInput.files[0]);
+
+        const response = await fetch(`http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/upload?username=${username}`, {
+            method: 'POST',
+            body: requestBody
+        });
+        const data = await response.text();
+
+        if(response.status !== 200) {
+            window.alert(data);
+        } else {
+            newAccount.profilePictureURL = `http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/get?imageName=${data}`;
+            modifyAccount();
+        }
+    }
+
     const changeRequestBody = (event) => {
         const {id} = event.target;
 
@@ -75,7 +101,8 @@ const AccountDetails = ({ username }) => {
         <div className="account-details-content">
             <div className="profile-picture-content">
                 <img src={account.profilePictureURL} alt=""></img>
-                <p>Change profile picture</p>
+                <p onClick={openFileExplorer}>Change profile picture</p>
+                <input type="file" onChange={uploadImage}></input>
             </div>
             <div className="other-account-details">
                 <div className="username">Username: 

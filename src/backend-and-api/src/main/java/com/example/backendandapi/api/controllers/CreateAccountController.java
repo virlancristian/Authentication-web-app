@@ -6,7 +6,6 @@ import com.example.backendandapi.models.requests.CreateAccountRequest;
 import com.example.backendandapi.models.dbentities.UserDbEntity;
 import com.example.backendandapi.services.userdb.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,7 +46,7 @@ public class CreateAccountController {
         }
 
         if(userDbService.getUser(username) != null) {
-            return ResponseStatus.ACCOUNTS_EXISTS;
+            return ResponseStatus.ACCOUNT_EXISTS;
         }
 
         if(email == null || !email.matches(RequestVerifierConstants.EMAIL_REGEX)) {
