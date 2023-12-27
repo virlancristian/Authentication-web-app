@@ -42,9 +42,13 @@ const AccountDetails = ({ username }) => {
         if(response.status !== 200) {
             window.alert(data);
         } else {
-            newAccount.profilePictureURL = `http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/get?imageName=${data}`;
-            modifyAccount();
+            changeProfilePicture(data);
         }
+    }
+
+    const changeProfilePicture = (imageName) => {
+        newAccount.profilePictureURL = `http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/get?imageName=${imageName}`;
+        modifyAccount(); 
     }
 
     const changeRequestBody = (event) => {
