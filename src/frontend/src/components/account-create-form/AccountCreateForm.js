@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import messages from '../../cache/api-messages';
 import formInputs from '../../cache/form-inputs';
 
 const AccountCreateForm = () => {
     const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
+    const navigate = useNavigate();
 
     const [account, setAccount] = useState({
         username: '',
@@ -32,6 +34,10 @@ const AccountCreateForm = () => {
         }).then(response => response.json())
         .then(data => {
             window.alert(messages[data]);
+
+            if(data === 'OPERATION_SUCCESSFUL') {
+                navigate("/", { state: { username: account.username} })
+            }
         })
         .catch(error => {
             console.log(error);
@@ -48,9 +54,7 @@ const AccountCreateForm = () => {
                     </div>
                 ))
             }
-            <div className="field" id="create-account-button" onClick={createAccountRequest}>
-                <div className="button">Create account</div>
-            </div>
+            <div className="field" id="create-account-button" onClick={createAccountRequest}>Create account</div>
         </div>
     );
 }

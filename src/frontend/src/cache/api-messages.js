@@ -6,7 +6,9 @@ const messages = {
     "USERNAME_NOT_FOUND": "An account with the following username was not found!",
     "INCORRECT_PASSWORD": "Incorrect password!",
     "PASSWORDS_NOT_MATCHING": "Password fields are not matching.",
-    "ACCOUNT_EXISTS": "An account with the following username already exists!"
+    "ACCOUNT_EXISTS": "An account with the following username already exists!",
+    "NULL_IMAGE": "Image is null!",
+    "UNSUPPORTED_IMAGE_FORMAT": "The image format is not supported!"
 };
 
 export default messages;

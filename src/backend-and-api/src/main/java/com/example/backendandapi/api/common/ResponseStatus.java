@@ -8,7 +8,9 @@ public enum ResponseStatus {
     USERNAME_NOT_FOUND("Username not found."),
     INCORRECT_PASSWORD("Incorrect password!"),
     PASSWORDS_NOT_MATCHING("Passwords don't match."),
-    ACCOUNTS_EXISTS("Account already exists!");
+    ACCOUNT_EXISTS("Account already exists!"),
+    NULL_IMAGE("Image is null!"),
+    UNSUPPORTED_IMAGE_FORMAT("The image format is not supported!");
 
     private String message;
 
