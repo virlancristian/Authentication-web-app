@@ -1,15 +1,12 @@
 package org.example;
 
-import org.w3c.dom.Text;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class App {
     private int buildPhase;      //1 - frontend configuration, 2 - backend configuration
-    private static final String APPLICATION_PROPERTIES_PATH = "src/backend-and-api/target/classes/application.properties";
+    private static final String APPLICATION_PROPERTIES_PATH = "/src/backend-and-api/src/main/resources/application.properties";
 
     public App(int buildPhase) {
         if(buildPhase != 1 && buildPhase != 2) {
@@ -23,41 +20,38 @@ public class App {
         if(buildPhase == 1) {
             InputReader inputReader = new InputReader();
             List<String> dbCredentials = new ArrayList<>();
+            List<String> applicationProperties = new TextFileIO(APPLICATION_PROPERTIES_PATH).readAllLines();
+            List<String> overwrittenProperties = null;
 
             inputReader.readInput();
 
             dbCredentials.add(inputReader.getProvidedDbUsername());
             dbCredentials.add(inputReader.getProvidedDbPassword());
+            overwrittenProperties = overwriteBackendProperties(dbCredentials, applicationProperties, false);
 
             new TextFileIO("src/frontend/.env").writeSingleLine("REACT_APP_PROVIDED_IP=" + inputReader.getProvidedIp());
+            new TextFileIO(APPLICATION_PROPERTIES_PATH).writeAllLines(overwrittenProperties);
             new TextFileIO("database_credentials.txt").writeAllLines(dbCredentials);
         } else {
             List<String> dbCredentials = new TextFileIO("database_credentials.txt").readAllLines();
             List<String> applicationProperties = new TextFileIO(APPLICATION_PROPERTIES_PATH).readAllLines();
+            List<String> cleanProperties = overwriteBackendProperties(dbCredentials, applicationProperties, true);
 
-            writeBackendProperties(dbCredentials, applicationProperties);
+            new TextFileIO(APPLICATION_PROPERTIES_PATH).writeAllLines(cleanProperties);
         }
     }
 
-    private void writeBackendProperties(List<String> dbCredentials, List<String> applicationProperties) {
-        try {
-            FileWriter writer = new FileWriter(APPLICATION_PROPERTIES_PATH);
-            System.out.println("Overwriting application.properties");
+    private List<String> overwriteBackendProperties(List<String> dbCredentials, List<String> applicationProperties, boolean clean) {
+        List<String> overwrittenProps = new ArrayList<>();
 
-            for(String property:applicationProperties) {
-                if(property.equals("spring.datasource.username=")) {
-                    writer.write("spring.datasource.username=" + dbCredentials.get(0) + '\n');
-                } else if(property.equals("spring.datasource.password=")) {
-                    writer.write("spring.datasource.password=" + dbCredentials.get(1) + '\n');
-                } else {
-                    writer.write(property + '\n');
-                }
+        for(String property:applicationProperties) {
+            if(property.contains("spring.datasource.username=")) {
+                overwrittenProps.add(clean ? "spring.datasource.username=" : (property + dbCredentials.get(0)));
+            } else if(property.contains("spring.datasource.password=")) {
+                overwrittenProps.add(clean ? "spring.datasource.password" : (property + dbCredentials.get(1)));
             }
-
-            writer.close();
-            System.out.println("Backend config built successfully!");
-        } catch(IOException error) {
-            System.out.println("Error in overwriting application.properties!\n" + error);
         }
+
+        return overwrittenProps;
     }
 }
