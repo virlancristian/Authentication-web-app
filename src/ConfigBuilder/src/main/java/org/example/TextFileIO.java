@@ -62,7 +62,7 @@ public class TextFileIO {
 
             writer.close();
         } catch(IOException error) {
-            System.out.println("Error in TextFileIO::writeSingleLine - unable to write to " + inputFile.getName() + ": " + error);
+            System.out.println("Error in TextFileIO::writeAllLines - unable to write to " + inputFile.getName() + ": " + error);
         }
     }
 }

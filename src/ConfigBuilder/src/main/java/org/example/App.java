@@ -6,7 +6,7 @@ import java.util.List;
 
 public class App {
     private int buildPhase;      //1 - frontend configuration, 2 - backend configuration
-    private static final String APPLICATION_PROPERTIES_PATH = "/src/backend-and-api/src/main/resources/application.properties";
+    private static final String APPLICATION_PROPERTIES_PATH = "src/backend-and-api/src/main/resources/application.properties";
 
     public App(int buildPhase) {
         if(buildPhase != 1 && buildPhase != 2) {
@@ -49,6 +49,8 @@ public class App {
                 overwrittenProps.add(clean ? "spring.datasource.username=" : (property + dbCredentials.get(0)));
             } else if(property.contains("spring.datasource.password=")) {
                 overwrittenProps.add(clean ? "spring.datasource.password" : (property + dbCredentials.get(1)));
+            } else {
+                overwrittenProps.add(property);
             }
         }
 
