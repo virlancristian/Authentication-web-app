@@ -23,7 +23,7 @@ echo Writing config files...
 
 timeout /nobreak /t 1 > nul
 
-java -jar ConfigBuilder.jar frontend
+java -jar ConfigBuilder.jar build
 
 del local_ip.txt
 
@@ -59,7 +59,7 @@ echo Final steps...
 
 timeout /nobreak /t 1  > nul
 
-java -jar ConfigBuilder.jar backend
+java -jar ConfigBuilder.jar clean
 
 echo Build completed successfully!
 
