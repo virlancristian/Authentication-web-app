@@ -25,22 +25,20 @@ public class UploadImageController {
     @CrossOrigin
     @PostMapping("/api/account/pfp/upload")
     public ResponseEntity<String> uploadImage(@RequestBody MultipartFile image,
-                                              @RequestParam String username) {
-        String imageFormat = Miscellaneous.getImageNameInfo(image.getOriginalFilename(), true);
-        ResponseStatus response = verifyRequest(image, username, imageFormat);
-        StringBuilder imageName;
+                                              @RequestParam(value = "username") String username) {
+        String imageFormat = Miscellaneous.splitImageName(image.getOriginalFilename(), true);
+        Long userId = userDbService.findIdByUsername(username);
 
-        if(response != ResponseStatus.OPERATION_SUCCESSFUL) {
-            return new ResponseEntity<>(response.getMessage(), HttpStatus.BAD_REQUEST);
+        if(verifyRequest(image, userId, imageFormat) != ResponseStatus.OPERATION_SUCCESSFUL) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        imageDbService.saveImage(image, username, imageFormat);
-        imageName = new StringBuilder(username + "." + imageFormat);
+        imageDbService.saveImage(image, "user_" + userId.toString(), imageFormat);
 
-        return ResponseEntity.status(HttpStatus.OK).body(imageName.toString());
+        return ResponseEntity.status(HttpStatus.OK).body("user_" + userId.toString() + "." + imageFormat);
     }
 
-    private ResponseStatus verifyRequest(MultipartFile image, String username, String imageFormat) {
+    private ResponseStatus verifyRequest(MultipartFile image, Long userId, String imageFormat) {
         if(image == null) {
             return ResponseStatus.NULL_IMAGE;
         }
@@ -49,7 +47,7 @@ public class UploadImageController {
             return ResponseStatus.UNSUPPORTED_IMAGE_FORMAT;
         }
 
-        if(userDbService.getUser(username) == null) {
+        if(userDbService.findUserById(userId) == null) {
             return ResponseStatus.USERNAME_NOT_FOUND;
         }
 
