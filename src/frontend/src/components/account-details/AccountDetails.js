@@ -32,8 +32,8 @@ const AccountDetails = ({ username }) => {
         let requestBody = new FormData();
 
         requestBody.append('image', uploadImageInput.files[0]);
-
-        const response = await fetch(`http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/upload?username=${username}`, {
+        console.log(`${account.id}`)
+        const response = await fetch(`http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/upload?username=${username || account.username}`, {
             method: 'POST',
             body: requestBody
         });

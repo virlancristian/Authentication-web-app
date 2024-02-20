@@ -32,4 +32,12 @@ public class UserDbService {
 
         repository.save(requestedUser);
     }
+
+    public UserDbEntity findUserById(Long id) {
+        return repository.findUserById(id);
+    }
+
+    public Long findIdByUsername(String username) {
+        return repository.findIdByUsername(username);
+    }
 }
