@@ -5,7 +5,7 @@ import messages from '../../cache/api-messages';
 import formInputs from '../../cache/form-inputs';
 
 const AccountCreateForm = () => {
-    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
+    const PROVIDED_IP = process.env.REACT_APP_PROVIDED_IP;
     const navigate = useNavigate();
 
     const [account, setAccount] = useState({
@@ -25,7 +25,7 @@ const AccountCreateForm = () => {
     };
 
     const createAccountRequest = () => {
-        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/create`, {
+        fetch(`${PROVIDED_IP || 'http://localhost:8080'}/api/account/create`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

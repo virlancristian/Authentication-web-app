@@ -6,7 +6,7 @@ import messages from '../../cache/api-messages';
 import '../../css/account-details.css';
 
 const AccountDetails = ({ username }) => {
-    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
+    const PROVIDED_IP = process.env.REACT_APP_PROVIDED_IP;
     const navigate = useNavigate();
     
     const [account, setAccount] = useState({});
@@ -33,7 +33,7 @@ const AccountDetails = ({ username }) => {
 
         requestBody.append('image', uploadImageInput.files[0]);
 
-        const response = await fetch(`http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/upload?username=${username || account.username}`, {
+        const response = await fetch(`${PROVIDED_IP || `http://localhost:8080`}/api/account/pfp/upload?username=${username || account.username}`, {
             method: 'POST',
             body: requestBody
         });
@@ -47,7 +47,7 @@ const AccountDetails = ({ username }) => {
     }
 
     const changeProfilePicture = (imageName) => {
-        newAccount.profilePictureURL = `http://${INTERNAL_IP || `localhost`}:8080/api/account/pfp/get?imageName=${imageName}`;
+        newAccount.profilePictureURL = `${PROVIDED_IP || `http://localhost:8080`}/api/account/pfp/get?imageName=${imageName}`;
         modifyAccount(); 
     }
 
@@ -61,7 +61,7 @@ const AccountDetails = ({ username }) => {
     }
 
     const modifyAccount = () => {
-        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/edit`, {
+        fetch(`${PROVIDED_IP || 'http://localhost:8080'}/api/account/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -72,7 +72,7 @@ const AccountDetails = ({ username }) => {
             window.alert(messages[data]);
             
             if(data === 'OPERATION_SUCCESSFUL') {
-                navigate("/account.html", {state: {"username": newAccount.newUsername != null ? newAccount.newUsername : username}});
+                navigate("/account", {state: {"username": newAccount.newUsername != null ? newAccount.newUsername : username}});
                 window.location.reload();
             }
         })
@@ -91,7 +91,7 @@ const AccountDetails = ({ username }) => {
 
    useEffect(() => {
     const requestAccount = () => {
-        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account?username=${username}`)
+        fetch(`${PROVIDED_IP || 'http://localhost:8080'}/api/account?username=${username}`)
         .then(response => response.json())
         .then(data => {
             setAccount(data);
@@ -99,7 +99,7 @@ const AccountDetails = ({ username }) => {
     }
 
     requestAccount();
-   }, [username, INTERNAL_IP]);
+   }, [username, PROVIDED_IP]);
 
     return (
         <div className="account-details-content">
@@ -122,7 +122,7 @@ const AccountDetails = ({ username }) => {
                             "Edit profile"
                         }
                     </div>
-                    <div className="change-password-button" onClick={() => navigate("/change_password.html", {state: {"username": username}})}>Change password</div>
+                    <div className="change-password-button" onClick={() => navigate("/change_password", {state: {"username": username}})}>Change password</div>
                 </div>
             </div>
         </div>

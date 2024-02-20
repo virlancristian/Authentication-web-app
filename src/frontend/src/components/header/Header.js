@@ -13,13 +13,13 @@ function Header({ username }) {
             {
                 username != null ? 
                 (<>
-                    <div id="header-button" onClick={() => navigate("/account.html", {state: {username}})}>My account</div> 
+                    <div id="header-button" onClick={() => navigate("/account", {state: {username}})}>My account</div> 
                     <div id="header-button" onClick={() => handleLogOut()}>Log out</div>
                 </>) 
                 : (
                     <>
-                        <a href="create_account.html">Create account</a> 
-                        <a href="login.html">Log in</a>
+                        <a href="create_account">Create account</a> 
+                        <a href="login">Log in</a>
                     </>
                 )
             }

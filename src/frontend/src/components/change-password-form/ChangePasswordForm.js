@@ -6,7 +6,7 @@ import messages from '../../cache/api-messages';
 import '../../css/change-password-form.css';
 
 const ChangePasswordForm = ({ username }) => {
-    const INTERNAL_IP = process.env.REACT_APP_INTERNAL_IP;
+    const PROVIDED_IP = process.env.REACT_APP_PROVIDED_IP;
     const navigate = useNavigate();
     
     const [newAccount, setNewAccount] = useState({
@@ -29,7 +29,7 @@ const ChangePasswordForm = ({ username }) => {
     };
 
     const modifyAccount = () => {
-        fetch(`http://${INTERNAL_IP || 'localhost'}:8080/api/account/edit`, {
+        fetch(`${PROVIDED_IP || 'http://localhost:8080'}/api/account/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +40,7 @@ const ChangePasswordForm = ({ username }) => {
             window.alert(messages[data]);
             
             if(data === 'OPERATION_SUCCESSFUL') {
-                navigate("/account.html", {state: {username: newAccount.newUsername || username}});
+                navigate("/account", {state: {username: newAccount.newUsername || username}});
             }
         })
         .catch(error => {
