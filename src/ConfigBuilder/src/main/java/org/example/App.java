@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    private int buildPhase;      //1 - frontend configuration, 2 - backend configuration
+    private int buildPhase;      //1 - build configuration, 2 - cleaning configuration
     private static final String APPLICATION_PROPERTIES_PATH = "src/backend-and-api/src/main/resources/application.properties";
 
     public App(int buildPhase) {

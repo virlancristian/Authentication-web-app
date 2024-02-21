@@ -18,7 +18,7 @@ public class TextFileIO {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             readLine = reader.readLine();
         } catch(IOException error) {
-            System.out.println("Error in TextFileIO::readSingleLine - couldn't create BufferedReader");
+            System.out.println("Error in TextFileIO::readSingleLine() - couldn't create BufferedReader");
         }
 
         return readLine;
@@ -48,7 +48,7 @@ public class TextFileIO {
             writer.write(input);
             writer.close();
         } catch(IOException error) {
-            System.out.println("Error in TextFileIO::writeSingleLine - unable to write to " + inputFile.getName() + ": " + error);
+            System.out.println("Error in TextFileIO::writeSingleLine() - unable to write to " + inputFile.getName() + ": " + error);
         }
     }
 
@@ -62,7 +62,7 @@ public class TextFileIO {
 
             writer.close();
         } catch(IOException error) {
-            System.out.println("Error in TextFileIO::writeAllLines - unable to write to " + inputFile.getName() + ": " + error);
+            System.out.println("Error in TextFileIO::writeAllLines() - unable to write to " + inputFile.getName() + ": " + error);
         }
     }
 }

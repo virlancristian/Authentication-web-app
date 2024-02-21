@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo "Starting application build..."
 
 sleep 1
@@ -8,35 +6,31 @@ echo "Obtaining address..."
 
 sleep 1
 
-ipAddress=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}')
+ipAddress=$(ifconfig | grep -oP 'inet \K[\d.]+')
 
-echo "$ipAddress" > internal_ip.txt
+echo "${ipAddress}" > local_ip.txt
 
-echo "IP address has been saved to internal_ip.txt"
+echo "IP address has been saved to local_ip.txt"
 
 echo "Writing config files..."
 
 sleep 1
 
-java -jar ConfigBuilder.jar
+java -jar ConfigBuilder.jar build
 
-rm internal_ip.txt
+rm local_ip.txt
 
-echo "Installing Maven dependencies..."
+echo "Resolving dependencies..."
 
 sleep 1
 
-cd ./src/backend-and-api
+cd ./src/backend-and-api || exit
 
 if [ -d "target" ]; then
     rm -rf target
 fi
 
-./mvnw dependency:resolve
-
-cd ../frontend
-
-echo "Installing Node dependencies..."
+cd ../frontend || exit
 
 sleep 1
 
@@ -44,9 +38,9 @@ if [ -d "node_modules" ]; then
     rm -rf node_modules
 fi
 
-npm i
+cd ../backend-and-api || exit
 
-cd ../backend-and-api
+./mvnw dependency:resolve
 
 echo "Building executables..."
 
@@ -54,6 +48,10 @@ sleep 1
 
 ./mvnw package
 
-echo "Build completed successfully!"
+echo "Final steps..."
 
-read -p "Press Enter to exit..."
+sleep 1
+
+java -jar ConfigBuilder.jar clean
+
+echo "Build completed successfully!"
