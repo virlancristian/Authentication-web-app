@@ -46,9 +46,9 @@ public class App {
 
         for(String property:applicationProperties) {
             if(property.contains("spring.datasource.username=")) {
-                overwrittenProps.add(clean ? "spring.datasource.username=" : (property + dbCredentials.get(0)));
+                overwrittenProps.add(clean ? "spring.datasource.username=" : ("spring.datasource.username=" + dbCredentials.get(0)));
             } else if(property.contains("spring.datasource.password=")) {
-                overwrittenProps.add(clean ? "spring.datasource.password" : (property + dbCredentials.get(1)));
+                overwrittenProps.add(clean ? "spring.datasource.password=" : ("spring.datasource.password=" + dbCredentials.get(1)));
             } else {
                 overwrittenProps.add(property);
             }
